@@ -1,19 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import VerifyMobile from './VerifyMobile'
-import Home from './Home'
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./Home";
+import LandingPage from "./LandingPage";
+import Form from "./Form";
+import VerifyMobile from "./VerifyMobile";
+import  StartKYC  from "./StartKYC";
+import Otp from "./Otp";
+import PlayerDetails from "./PlayerDetails";
+import EnterAdhar from "./EnterAdhar";
+import CreditScore from "./CreditScore.jsx";
 
 function App() {
-
-
   return (
-    <div >
-      <Home/>
-      
-    </div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/apply" element={<Form />} />
+        {/* Correctly render VerifyMobile component with JSX */}
+        <Route path="/verify-mobile" element={<VerifyMobile />} />
+        <Route path="/start-kyc" element={<StartKYC />} />
+        <Route path="/otp" element={<Otp />} />
+        <Route path="/player-details" element={<PlayerDetails/>} />
+        <Route path="/enter-adhar" element={<EnterAdhar/>} />
+        <Route path="/credit-score" element={<CreditScore/>} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
