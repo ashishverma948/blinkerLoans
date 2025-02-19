@@ -7,11 +7,10 @@ const StartKYC = () => {
   const navigate = useNavigate(); 
   const [pan, setPan] = useState("");
   const [phone, setPhone] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
   const [errors, setErrors] = useState({});
 
   const validatePAN = (pan) => /^[A-Z]{5}[0-9]{4}[A-Z]$/.test(pan);
-  const validatePhone = (phone) => /[0-9]{10}$/.test(phone);
+  const validatePhone = (phone) => /^[0-9]{10}$/.test(phone);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,10 +20,7 @@ const StartKYC = () => {
       newErrors.pan = "Invalid PAN format (ABCDE1234F).";
     }
     if (!validatePhone(phone)) {
-      newErrors.phone = "Invalid phone number (must start with 91 and be 12 digits).";
-    }
-    if (!isChecked) {
-      newErrors.checkbox = "You must agree to the Terms & Conditions.";
+      newErrors.phone = "Invalid phone number (must be 10 digits).";
     }
 
     setErrors(newErrors);
@@ -37,62 +33,41 @@ const StartKYC = () => {
 
   return (
     <>
+      <Navbar />
       <div
-        className="w-full min-h-[100vh] flex items-center justify-center p-4"
+        className="w-full min-h-screen flex items-center justify-center"
         style={{ background: "radial-gradient(circle, #B20000 0%, #4C0000 100%)" }}
       >
-        <Navbar />
-
-        <div className="bg-[#580610] p-6 rounded-2xl shadow-lg w-full max-w-[598px] h-[550px] mt-20 flex flex-col justify-center text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">
-            Start to your <span className="text-yellow-400">KYC</span>
+        <div className="bg-[#58050f] p-10 rounded-xl shadow-lg w-[500px] text-center">
+          <h2 className="text-white text-3xl font-bold mb-6">
+            Start Your <span className="text-yellow-400">KYC</span>
           </h2>
-          <form className="space-y-4" onSubmit={handleSubmit}>
-            <div className="w-100ll">
-              <label className="block text-white mr-80">PAN Card</label>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-6 text-left">
+              <label className="text-white block mb-2 text-lg">PAN Card</label>
               <input
                 type="text"
-                className="w-100 px-3 py-2 bg-[#FFD700] text-black border-none rounded-lg"
-                placeholder="XXXXXXXXXX"
+                placeholder="ABCDE1234F"
                 value={pan}
                 onChange={(e) => setPan(e.target.value.toUpperCase())}
-                required
+                className="w-full p-3 bg-yellow-400 text-black rounded text-lg"
               />
               {errors.pan && <p className="text-red-500 text-sm">{errors.pan}</p>}
             </div>
-            <div>
-  <label className="block text-white mr-70">Phone number</label>
-
-  <div className="flex items-center w-100 ml-19">
-    <span className="px-3 py-2 bg-[#F1B307] text-black font-semibold rounded-l-lg">
-      +91
-    </span>
-    <input
-      type="text"
-      className="w-full px-3 py-2 bg-[#FFD700] text-black border-none rounded-r-lg"
-      value={phone}
-      onChange={(e) => setPhone(e.target.value)}
-      required
-    />
-  </div>
-
-  {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
-</div>
-
-            <div className="flex items-center text-white text-left">
+            <div className="mb-6 text-left">
+              <label className="text-white block mb-2 text-lg">Phone Number</label>
               <input
-                type="checkbox"
-                checked={isChecked}
-                onChange={() => setIsChecked(!isChecked)}
-                className="ml-34"
+                type="text"
+                placeholder="Enter Phone Number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full p-3 bg-yellow-400 text-black rounded text-lg"
               />
-              <span className="ml-2">I agree to the Terms & Conditions</span>
+              {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
             </div>
-            {errors.checkbox && <p className="text-red-500 text-sm">{errors.checkbox}</p>}
             <button
-              
               type="submit"
-              className="w-100 bg-red-600 text-white py-2 rounded-lg border border-white hover:bg-red-700 transition cursor-pointer"
+              className="w-full bg-red-600 text-white py-3 rounded mt-4 text-lg hover:bg-red-700 border border-white cursor-pointer"
             >
               Submit
             </button>

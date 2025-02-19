@@ -8,6 +8,7 @@ import Otp from "./Otp";
 import PlayerDetails from "./PlayerDetails";
 import EnterAdhar from "./EnterAdhar";
 import CreditScore from "./CreditScore.jsx";
+import Loan from "./Loan.jsx";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/player-details" element={<PlayerDetails/>} />
         <Route path="/enter-adhar" element={<EnterAdhar/>} />
         <Route path="/credit-score" element={<CreditScore/>} />
+        <Route path="/loan" element={<Loan/>} />
       </Routes>
     </Router>
   );
